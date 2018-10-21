@@ -1,1 +1,69 @@
 {% extends "booking/layouts/base.html" %}
+{% load static %}
+{% block content %}
+  <link rel="stylesheet" type="text/css" href="{% static 'booking/css/detail.css' %}">
+  <div class="container">
+    <div class="card mx-auto">
+      <div class="card-body">
+        <h5 class="card-title text-center">Reserva</h5>
+        <p class="card-text">
+          <div class="row">
+            <div class="col-6">
+              <p>Nombre: {{ reservation.name_text }}</p>
+            </div>
+            <div class="col-6">
+              <p>Apellidos: {{ reservation.surname_text }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <p>DNI: {{ reservation.id_card_text }}</p>
+            </div>
+            <div class="col-6">
+              <p>Email: {{ reservation.email }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <p>Teléfono: {{ reservation.phone_number_text }}</p>
+            </div>
+            <div class="col-6">
+              <p>Tarjeta de crédito: {{ reservation.payment_card_text }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <p>Total: {{ reservation.amount_number }}</p>
+            </div>
+            <div class="col-6">
+              <p>Fecha: {{ reservation.date }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <p>Habitación {{ reservation.room.type_text }}</p>
+            </div>
+            <div class="col-6">
+              <p>Precio por noche: {{ reservation.room.price_number }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <p>Código de reserva: {{ reservation.code }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <p>Comentario: {{ reservation.id }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 text-center button">
+              <a class="btn btn-dark" href="{% url 'booking:bookingPdf' reservation.id %}">Ver en PDF</a>
+            </div>
+          </div>
+        </p>
+      </div>
+    </div>
+  </div>
+{% endblock %}
