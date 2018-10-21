@@ -1,0 +1,60 @@
+{% extends "booking/layouts/base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'booking/css/reserve.css' %}">
+<div class="container">
+  <div class="card mx-auto">
+    <div class="card-body">
+      <h5 class="card-title text-center">Introduce los datos de reserva</h5>
+      <p class="card-text">
+        <form action="{% url 'booking:reservations' %}" method="post">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-6">
+              <label for="name">Nombre: </label>
+              <input type="text" name="name" required></input>
+            </div>
+            <div class="col-6">
+              <label for="surname">Apellidos: </label>
+              <input type="text" name="surname" required></input>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label for="id">DNI: </label>
+              <input type="text" name="dni" required></input>
+            </div>
+            <div class="col-6">
+              <label for="name">Email: </label>
+              <input type="email" name="email" required></input>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label for="phone">Teléfono: </label>
+              <input type="text" name="phone"  required></input>
+            </div>
+            <div class="col-6">
+              <label for="creditCard">Tarjeta de crédito: </label>
+              <input type="text" name="creditCard" required></input>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <label for="comment">Si lo desea puede dejar un comentario</label>
+              <textarea rows="5" name="comment"></textarea>
+              <input type="hidden" name="roomPrice" value="{{ room.price_number }}"></input>
+              <input type="hidden" name="roomId" value="{{ room.id }}"></input>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 text-center button">
+              <input type="submit" class="btn btn-dark" value="Reservar">
+            </div>
+          </div>
+        </form>
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}
