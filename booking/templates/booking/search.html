@@ -1,6 +1,5 @@
 {% extends "booking/layouts/base.html" %}
 {% load static %}
-
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'booking/css/search.css' %}">
 <div class="container">
@@ -8,7 +7,7 @@
     <div class="card-body">
       <h5 class="card-title text-center">Selecciona un rango de fechas</h5>
       <p class="card-text">
-        <form action="" method="post">
+        <form action="{% url 'booking:results' %}" method="get">
           {% csrf_token %}
           <div class="row">
             <div class="col-6">

@@ -1,1 +1,34 @@
 {% extends "booking/layouts/base.html" %}
+{% load static %}
+{% load mathfilters %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'booking/css/results.css' %}">
+<div class="d-flex flex-row flex-wrap">
+  {% for room in rooms %}
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Habitación {{ room.type_text }}</h5>
+        <p class="card-text">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-12">
+              <p>{{ room.description_text }}</p>
+            </div>
+            <div class="col-6">
+              <p>{{ room.price_number }}€/noche</p>
+            </div>
+            <div class="col-6">
+              <p>Total {{ total_days | mul:room.price_number }}€</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 text-center button">
+              <a class="btn btn-dark"  href="{% url 'booking:reserve' room.id %}">Reservar</a>
+            </div>
+          </div>
+        </p>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}
