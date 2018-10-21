@@ -8,7 +8,7 @@ class Room(models.Model):
     type_text = models.CharField(max_length=200)
     available_date = models.DateField()
     price_number = models.FloatField()
-    description_text = models.CharField(max_length=600, default='')
+    description_text = models.CharField(max_length=1000, default='')
 
     def __str__(self):
         return '{type} room for {price}'.format(type=self.type_text,price=self.price_number)
@@ -24,6 +24,7 @@ class Booking(models.Model):
     days = models.IntegerField(default=1)
     payment_card = models.IntegerField()
     phone_number = models.CharField(max_length=20)
+    comment_text = models.CharField(max_length=1000, null=True)
 
     def __str__(self):
         return '{}'.format(self.code)
