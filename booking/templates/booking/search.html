@@ -1,0 +1,31 @@
+{% extends "booking/layouts/base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'booking/css/search.css' %}">
+<div class="container">
+  <div class="card mx-auto">
+    <div class="card-body">
+      <h5 class="card-title text-center">Selecciona un rango de fechas</h5>
+      <p class="card-text">
+        <form action="" method="post">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-6">
+              <input type="date" name="fromDate" required></input>
+            </div>
+            <div class="col-6">
+              <input type="date" name="toDate" required></input>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 text-center button">
+              <input type="submit" class="btn btn-dark" value="Buscar">
+            </div>
+          </div>
+        </form>
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}
