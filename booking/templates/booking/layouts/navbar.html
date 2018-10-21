@@ -6,10 +6,10 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item {{ search_page }}">
-        <a class="nav-link" href="{% url 'search' %}">Buscar habitaciones</a>
+        <a class="nav-link" href="{% url 'booking:search' %}">Buscar habitaciones</a>
       </li>
       <li class="nav-item {{ search_page }}">
-        <a class="nav-link" href="{% url 'reservations' %}">Reservas</a>
+        <a class="nav-link" href="{% url 'booking:reservations' %}">Reservas</a>
       </li>
     </ul>
   </div>
