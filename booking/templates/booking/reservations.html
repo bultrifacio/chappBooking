@@ -1,1 +1,35 @@
 {% extends "booking/layouts/base.html" %}
+{% load static %}
+{% block content %}
+  <link rel="stylesheet" type="text/css" href="{% static 'booking/css/reservations.css' %}">
+  <div class="d-flex flex-row flex-wrap">
+    {% for reservation in reservations %}
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ reservation.code }}</h5>
+          <p class="card-text">
+            <div class="row">
+              <div class="col-6">
+                <p>Habitación {{ reservation.room.type_text }}</p>
+              </div>
+              <div class="col-6">
+                <p>Tarjeta: {{ reservation.payment_card_text }}</p>
+              </div>
+              <div class="col-6">
+                <p>Total: {{ reservation.amount_number }}</p>
+              </div>
+              <div class="col-6">
+                <p>Fecha de reserva: {{ reservation.date }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 text-center button">
+                <a class="btn btn-dark" href="{% url 'booking:detail' reservation.id %}">Ver detalles</a>
+              </div>
+            </div>
+          </p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
