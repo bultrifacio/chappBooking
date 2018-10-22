@@ -9,6 +9,6 @@ urlpatterns = [
     path('reserve/<int:room_id>/', views.reserve, name='reserve'),
     path('reservations/', views.reservations, name='reservations'),
     path('detail/<int:booking_id>/', views.detail, name='detail'),
-    path('detail/<int:booking_id>/pdf', views.bookingPdf, name='bookingPdf'),
+    path('detail/<int:booking_id>/pdf', views.BookingPdf.as_view(), name='bookingPdf'),
     path('error/', views.error, name='error'),
 ]

@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Reserva</title>
+    <style type="text/css">
+        @page {
+            size: A4;
+            margin: 1cm;
+        }
+    </style>
+</head>
+<body>
+  <div class="container">
+    <h5>Reserva</h5>
+    <p>Código de reserva: {{ reservation.code }}</p>
+    <p>Nombre: {{ reservation.name_text }}</p>
+    <p>Apellidos: {{ reservation.surname_text }}</p>
+    <p>DNI: {{ reservation.id_card_text }}</p>
+    <p>Email: {{ reservation.email }}</p>
+    <p>Teléfono: {{ reservation.phone_number_text }}</p>
+    <p>Tarjeta de crédito: {{ reservation.payment_card_text }}</p>
+    <p>Fecha: {{ reservation.date }}</p>
+    <p>Habitación {{ reservation.room.type_text }}</p>
+    <p>Precio por noche: {{ reservation.room.price_number }}</p>
+    <p>Comentario: {{ reservation.comment_text }}</p>
+    <p>Total: {{ reservation.amount_number }}</p>
+  </div>
+</body>
+</html>

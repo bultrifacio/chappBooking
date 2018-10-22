@@ -1,11 +1,12 @@
 from datetime import datetime
 import io
-from reportlab.pdfgen import canvas
+from django.views.generic import View
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import loader
-from django.http import HttpResponse, FileResponse
+from django.http import HttpResponse
 from django.contrib.auth.models import User
 from .models import Room, Booking
+from .render import Render
 
 def search(request):
     context = {'search_page': 'active'}
@@ -77,20 +78,16 @@ def detail(request, booking_id):
     reservation = get_object_or_404(Booking, pk=booking_id)
     return render(request, 'booking/detail.html', {'reservation': reservation})
 
-def bookingPdf(request, booking_id):
-    reservation = get_object_or_404(Booking, pk=booking_id)
-    buffer = io.BytesIO()
-    reservation_file = canvas.Canvas(buffer)
-    reservation_file.drawString(100, 100, "'Cdigo de reserva: '")
-    '''file.drawString(100,100,'Código de reserva: {}'.format(reservation.name_text))
-    file.drawString(100,100,'Código de reserva: {}'.format(reservation.surname_text))
-    file.drawString(100,100,'Código de reserva: {}'.format(reservation.email))
-    file.drawString(100,100,'Código de reserva: {}'.format(reservation.phone_number_text))
-    file.drawString(100,100,'Código de reserva: {}'.format(reservation.payment_card_text))'''
-    reservation_file.showPage()
-    reservation_file.save()
-    return FileResponse(buffer, filename='{}.pdf'.format(reservation.code))
 
+class BookingPdf(View):
+
+    def get(self, request, booking_id):
+        reservation = get_object_or_404(Booking, pk=booking_id)
+        params = {
+            'reservation': reservation,
+            'request': request
+        }
+        return Render.render('booking/pdf.html', params)
 
 def error(request):
     return render(request, 'booking/error.html')
