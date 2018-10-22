@@ -46,6 +46,7 @@ def reservations(request):
             creditCard = request.POST['creditCard']
             comment = request.POST['comment']
             phone = request.POST['phone']
+            id_card = request.POST['idCard']
             room_id = request.POST['roomId']
             room = get_object_or_404(Room, pk=room_id)
             total_days = request.session.get('total_days')
@@ -59,7 +60,7 @@ def reservations(request):
             reservation = Booking(
                             name_text=name,
                             surname_text=surname,
-                            id_card_text=id,
+                            id_card_text=id_card,
                             email=email,
                             comment_text=comment,
                             phone_number_text=phone,
