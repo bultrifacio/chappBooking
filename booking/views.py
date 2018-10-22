@@ -1,6 +1,6 @@
 from datetime import datetime
 import io
-from django.views.generic import View
+from django.views import generic, View
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import loader
 from django.http import HttpResponse
@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from .models import Room, Booking
 from .render import Render
 
-def search(request):
+class Search(View):
     """
     Display a search form.
 
@@ -16,7 +16,9 @@ def search(request):
 
     :template:`booking/search.html`
     """
-    return render(request, 'booking/search.html')
+    def get(self, request):
+        template_name = "booking/search.html"
+        return render(request, template_name)
 
 
 def results(request):
@@ -166,7 +168,7 @@ class BookingPdf(View):
         }
         return Render.render('booking/pdf.html', params)
 
-def error(request):
+class Error(View):
     """
     Display a error view.
 
@@ -174,4 +176,6 @@ def error(request):
 
     :template:`booking/error.html`
     """
-    return render(request, 'booking/error.html')
+    def get(self, request):
+        template_name = "booking/error.html"
+        return render(request, template_name)
