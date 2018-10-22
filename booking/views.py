@@ -9,11 +9,32 @@ from .models import Room, Booking
 from .render import Render
 
 def search(request):
-    context = {'search_page': 'active'}
-    return render(request, 'booking/search.html', context)
+    """
+    Display a search form.
+
+    **Template:**
+
+    :template:`booking/search.html`
+    """
+    return render(request, 'booking/search.html')
 
 
 def results(request):
+    """
+    Display the room results in a date range
+
+    **Context**
+
+    ``rooms``
+        All the available rooms.
+
+    ``total_days``
+        Total days of stay.
+
+    **Template:**
+
+    :template:`booking/results.html`
+    """
     try:
         from_date = request.GET['fromDate']
         to_date = request.GET['toDate']
@@ -30,12 +51,35 @@ def results(request):
 
 
 def reserve(request, room_id):
+    """
+    Display the reserve form.
+
+    **Context**
+
+    ``room``
+        An instance of the selected room.
+
+    **Template:**
+
+    :template:`booking/reserve.html`
+    """
     room = get_object_or_404(Room, pk=room_id)
     return render(request, 'booking/reserve.html', {'room': room})
 
 
 def reservations(request):
-    context = {'reservations_page': 'active'}
+    """
+    Display all the reservations of the user.
+
+    **Context**
+
+    ``reservations``
+        All the reservations of the user.
+
+    **Template:**
+
+    :template:`booking/reservations.html`
+    """
     user = request.user
     reservations = Booking.objects.filter(user=user)
     if request.method == 'POST':
@@ -76,12 +120,35 @@ def reservations(request):
 
 
 def detail(request, booking_id):
+    """
+    Display the detail view of a reservation.
+
+    **Context**
+
+    ``reservation``
+        The selected reservation.
+
+    **Template:**
+
+    :template:`booking/detail.html`
+    """
     reservation = get_object_or_404(Booking, pk=booking_id)
     return render(request, 'booking/detail.html', {'reservation': reservation})
 
 
 class BookingPdf(View):
+    """
+    Generate and display the pdf of one reservation details.
 
+    **Context**
+
+    ``reservation``
+        An instance of the selected reservation.
+
+    **Template:**
+
+    :template:`booking/pdf.html`
+    """
     def get(self, request, booking_id):
         reservation = get_object_or_404(Booking, pk=booking_id)
         params = {
@@ -91,4 +158,11 @@ class BookingPdf(View):
         return Render.render('booking/pdf.html', params)
 
 def error(request):
+    """
+    Display a error view.
+
+    **Template:**
+
+    :template:`booking/error.html`
+    """
     return render(request, 'booking/error.html')

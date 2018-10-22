@@ -4,6 +4,9 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 
 class Room(models.Model):
+    """
+    Stores a room entry
+    """
     type_text = models.CharField(max_length=200)
     available_date = models.DateField()
     price_number = models.FloatField()
@@ -14,6 +17,9 @@ class Room(models.Model):
 
 
 class Booking(models.Model):
+    """
+    Stores a reservation entry related to a room and a user
+    """
     room = models.ForeignKey(Room, on_delete=models.PROTECT)
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     code = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
