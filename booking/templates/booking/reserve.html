@@ -9,45 +9,45 @@
       <p class="card-text">
         <form action="{% url 'booking:reservations' %}" method="post">
           {% csrf_token %}
-          <div class="row">
+          <div class="form-row">
             <div class="col-6">
               <label for="name">Nombre: </label>
-              <input type="text" name="name" required></input>
+              <input class="form-control" type="text" name="name" required></input>
             </div>
             <div class="col-6">
               <label for="surname">Apellidos: </label>
-              <input type="text" name="surname" required></input>
+              <input class="form-control" type="text" name="surname" required></input>
             </div>
           </div>
-          <div class="row">
-            <div class="col-6">
+          <div class="form-row">
+            <div class="col-4">
               <label for="id">DNI: </label>
-              <input type="text" name="idCard" required></input>
+              <input class="form-control" type="text" name="idCard" required></input>
             </div>
-            <div class="col-6">
+            <div class="col-8">
               <label for="name">Email: </label>
-              <input type="email" name="email" required></input>
+              <input class="form-control" type="email" name="email" required></input>
             </div>
           </div>
-          <div class="row">
+          <div class="form-row">
             <div class="col-6">
               <label for="phone">Teléfono: </label>
-              <input type="text" name="phone"  required></input>
+              <input class="form-control" type="text" name="phone"  required></input>
             </div>
             <div class="col-6">
               <label for="creditCard">Tarjeta de crédito: </label>
-              <input type="text" name="creditCard" required></input>
+              <input class="form-control" type="text" name="creditCard" required></input>
             </div>
           </div>
-          <div class="row">
+          <div class="form-row">
             <div class="col-12">
               <label for="comment">Si lo desea puede dejar un comentario</label>
-              <textarea rows="5" name="comment"></textarea>
+              <textarea class="form-control" rows="5" name="comment"></textarea>
               <input type="hidden" name="roomPrice" value="{{ room.price_number }}"></input>
               <input type="hidden" name="roomId" value="{{ room.id }}"></input>
             </div>
           </div>
-          <div class="row">
+          <div class="form-row">
             <div class="col-12 text-center button">
               <input type="submit" class="btn btn-dark" value="Reservar">
             </div>
