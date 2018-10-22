@@ -46,7 +46,10 @@ def results(request):
         from_date_formatted = datetime.strptime(from_date, date_format )
         to_date_formatted = datetime.strptime(to_date, date_format)
         total_days = (to_date_formatted - from_date_formatted).days
+        #Variables for other views
         request.session['total_days'] = total_days
+        request.session['from_date'] = from_date
+        request.session['to_date'] = to_date
         return render(request, 'booking/results.html', {'rooms' : rooms, 'total_days': total_days})
 
 
@@ -87,13 +90,15 @@ def reservations(request):
             name = request.POST['name']
             surname = request.POST['surname']
             email = request.POST['email']
-            creditCard = request.POST['creditCard']
+            credit_card = request.POST['creditCard']
             comment = request.POST['comment']
             phone = request.POST['phone']
             id_card = request.POST['idCard']
             room_id = request.POST['roomId']
             room = get_object_or_404(Room, pk=room_id)
             total_days = request.session.get('total_days')
+            from_date=request.session.get('from_date')
+            to_date=request.session.get('to_date')
             room_price = request.POST['roomPrice']
             user = request.user
             date = datetime.now().date()
@@ -108,13 +113,17 @@ def reservations(request):
                             email=email,
                             comment_text=comment,
                             phone_number_text=phone,
-                            payment_card_text=creditCard,
+                            payment_card_text=credit_card,
                             days_number=total_days,
                             amount_number=amount,
+                            from_date=from_date,
+                            to_date=to_date,
                             date=date,
                             room=room,
                             user=user)
             reservation.save()
+            room.available_date = to_date
+            room.save()
 
     return render(request, 'booking/reservations.html', {'reservations': reservations})
 

@@ -36,7 +36,15 @@
               <p>Total: {{ reservation.amount_number }}</p>
             </div>
             <div class="col-6">
-              <p>Fecha: {{ reservation.date }}</p>
+              <p>Fecha de compra: {{ reservation.date }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <p>Desde: {{ reservation.from_date }}</p>
+            </div>
+            <div class="col-6">
+              <p>Hasta: {{ reservation.to_date }}</p>
             </div>
           </div>
           <div class="row">

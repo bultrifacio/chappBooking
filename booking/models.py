@@ -33,6 +33,8 @@ class Booking(models.Model):
     id_card_text = models.CharField(max_length=20)
     email = models.EmailField()
     date = models.DateField()
+    from_date = models.DateField()
+    to_date = models.DateField()
 
     def __str__(self):
         return '{}'.format(self.code)

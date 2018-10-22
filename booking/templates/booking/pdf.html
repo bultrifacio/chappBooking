@@ -20,7 +20,8 @@
     <p>Email: {{ reservation.email }}</p>
     <p>Teléfono: {{ reservation.phone_number_text }}</p>
     <p>Tarjeta de crédito: {{ reservation.payment_card_text }}</p>
-    <p>Fecha: {{ reservation.date }}</p>
+    <p>Fecha de compra: {{ reservation.date }}</p>
+    <p>Fecha de reserva: {{ reservation.from_date }} - {{ reservation.to_date }}</p>
     <p>Habitación {{ reservation.room.type_text }}</p>
     <p>Precio por noche: {{ reservation.room.price_number }}</p>
     <p>Comentario: {{ reservation.comment_text }}</p>
