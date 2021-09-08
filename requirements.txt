@@ -1,7 +1,7 @@
 Django==2.2.13
 django-mathfilters==0.4.0
 html5lib==1.0.1
-Pillow==6.2.2
+Pillow==8.3.2
 PyPDF2==1.26.0
 pytz==2018.5
 six==1.11.0
